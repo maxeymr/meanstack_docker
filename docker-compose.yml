@@ -1,0 +1,22 @@
+version: '2' #docker-compose version
+
+#Define the services and containers
+services:
+  database: #Service name
+    image: mongo #Image to build container from
+    ports:
+      - "27017:27017"
+
+  express: #Service name
+    image: maxeymr/meanstack_express:dev #Image to build container from
+    ports:
+      - "3000:3000"
+    links:
+      - database
+
+  angular: #Service name
+    image: maxeymr/meanstack_angular:dev #Image to build container from
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./angular:/app #Trigger recompilation in container

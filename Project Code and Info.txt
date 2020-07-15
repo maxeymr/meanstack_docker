@@ -1,0 +1,50 @@
+
+The project images are on Docker Hub at the following...
+maxeymr/meanstack_express:dev
+maxeymr/meanstack_angular:dev
+
+The code for the express api app, angular app, and docker settings are at the following...
+https://github.com/lbkickerdude/meanstack_express.git
+https://github.com/lbkickerdude/meanstack_angular.git
+https://github.com/lbkickerdude/meanstack_docker.git
+
+
+
+
+
+Commands to push code to a github repository...
+On the folder to push to a repo...
+git init
+git add .
+git commit -m "Express apis for meanstack project"
+git remote add origin [URLtoREPO]
+  [URLtoREPO]=https://github.com/lbkickerdude/meanstack_angular.git [or] https://github.com/lbkickerdude/meanstack_express.git [or] https://github.com/lbkickerdude/meanstack_docker.git
+git push -u origin master
+
+
+
+
+
+Express api application endpoints (and with curl commands)...
+http://localhost:27017/
+http://localhost:4200/
+http://localhost:3000/
+http://localhost:3000/health
+http://localhost:4200/
+http://localhost:3000/todos
+http://localhost:3000/todos/id/[needsid]
+http://localhost:3000/todos/tag/Food
+http://localhost:3000/todos/tag/Relax
+
+curl -d '{"tag":"Food", "task":"Get groceries"}' -H "Content-Type: application/json" -X POST http://localhost:3000/todos
+curl -d '{"tag":"Food", "task":"Make supper"}' -H "Content-Type: application/json" -X POST http://localhost:3000/todos
+curl -d '{"tag":"Food", "task":"Eat food"}' -H "Content-Type: application/json" -X POST http://localhost:3000/todos
+curl -d '{"tag":"Relax", "task":"Take a nap"}' -H "Content-Type: application/json" -X POST http://localhost:3000/todos
+
+curl http://localhost:3000/todos
+
+curl http://localhost:3000/health
+curl -d '{"tag":"Food", "task":"Get groceries"}' -H "Content-Type: application/json" -X POST http://localhost:3000/todos
+curl http://localhost:3000/todos
+curl http://localhost:3000/todos/tag/Food
+curl http://localhost:3000/todos/id/[needsid]

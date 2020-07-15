@@ -1,0 +1,20 @@
+Mongodb running at http://localhost:27017/
+
+Angular app running at http://localhost:4200/
+
+Express app running at http://localhost:3000/
+
+Express app health endpoint at http://localhost:3000/health
+
+Angular application running at http://localhost:4200/ after adding 1 todo item…
+
+Express app todos endpoint at http://localhost:3000/todos
+Lists all todo items from the database.
+
+Express app todos/id endpoint at http://localhost:3000/todos/id/5f0e3711c6dfdd0010942aa2
+Only displays data for the id entered in the endpoint.
+
+Express app todos/tag endpoint at http://localhost:3000/todos/tag/Project
+Only displays data for the tag entered in the endpoint.
+
+Angular application running at http://localhost:4200/ after adding multiple todo items…
