@@ -1,12 +1,10 @@
 # MEAN Stack with Docker
 
-## Setting up an image for code development
-
-## Document the step-by-step process from the initial installation to the final production
+## Setting up an image for code development. This documents the step-by-step process from the initial installation to the final production
 
 ### Setup Clients
 
-1. Make sure Docker, Docker Compose, and Node are installed. In a terminal, run the following commands to verify&
+1. Make sure Docker, Docker Compose, and Node are installed. In a terminal, run the following commands to verify
 
 ```
 docker -v
@@ -34,7 +32,7 @@ Note:
 4. Setup Express API Application
    In the meanstack directory, create a directory with the command mkdir express
 
-In the express directory, create a file named package.json with the following text&
+In the express directory, create a file named package.json with the following text
 
 ```
 {
@@ -52,7 +50,7 @@ In the express directory, create a file named package.json with the following te
 }
 ```
 
-In the express directory, create a file named server.js with the following text&
+In the express directory, create a file named server.js with the following text
 
 ```
 //Get dependencies
@@ -91,7 +89,7 @@ const server = http.createServer(app);
 server.listen(port, () => console.log(`API running on localhost:${port}`));
 ```
 
-In the express directory, create a routes directory with an api.js file containing the following text&
+In the express directory, create a routes directory with an api.js file containing the following text
 
 ```
 //Import dependencies
@@ -180,7 +178,7 @@ npm start
 ```
 
 The application will be running at http://localhost:3000/ displaying the text Todo APIs& if it is working.
-Other endpoints created of interest by the curl command&
+Other endpoints created of interest by the curl command
 
 ```
 curl http://localhost:3000/health
@@ -193,7 +191,7 @@ curl http://localhost:3000/todos/id/[needsid]
 5. Setup Angular Application
    In the meanstack directory, create a directory with the command mkdir angular
 
-Run the following command to setup an angular app and set up dependencies in the angular directory&
+Run the following command to setup an angular app and set up dependencies in the angular directory
 
 ```
 npx @angular/cli new angular
@@ -209,7 +207,7 @@ In the angular/src directory, delete the file named app_modules.ts
 
 In the angular/src/app directory, delete the file named app.component.spec.ts
 
-In the angular/src directory, update the index.html file to the following&
+In the angular/src directory, update the index.html file to the following
 
 ```
 <!doctype html>
@@ -232,7 +230,7 @@ In the angular/src directory, update the index.html file to the following&
 </html>
 ```
 
-In the angular/src/app directory, update the app.component.html file to the following&
+In the angular/src/app directory, update the app.component.html file to the following
 
 ```
 <nav class="navbar navbar-light bg-faded">
@@ -269,7 +267,7 @@ In the angular/src/app directory, update the app.component.html file to the foll
 </div>
 ```
 
-In the angular/src/app directory, update the app.component.ts file to the following&
+In the angular/src/app directory, update the app.component.ts file to the following
 
 ```
 import { Component, OnInit } from '@angular/core';
@@ -315,7 +313,7 @@ this.todos = todos
 }
 ```
 
-In the angular/src/app directory, update the app.module.ts file to the following&
+In the angular/src/app directory, update the app.module.ts file to the following
 
 ```
 import { BrowserModule } from '@angular/platform-browser';
@@ -381,10 +379,16 @@ CMD ["npm", "start"]
 
 Extra: You can setup a .dockerignore file so certain files or folders will not copy to the app folder (for the Dockerfile).
 In the express directory, create a file named .dockerignore, with the following text
-node_modules/ The ignore file may be hidden so you will have to view hidden files.
 
-Build the docker image for express:dev from a terminal (make sure to cd to the express folder first) with the following command&
+```
+node_modules/ The ignore file may be hidden so you will have to view hidden files.
+```
+
+Build the docker image for express:dev from a terminal (make sure to cd to the express folder first) with the following command
+
+```
 docker build --rm -t express:dev .
+```
 
 You can test the image out by running the command: docker run --rm -d --name express -p 3000:3000 express:dev
 It may take a minute or more for the container to complete connection but check the logs several times by running the following command (to see when the container is running): docker logs express
@@ -394,7 +398,7 @@ It may take a minute or more for the container to complete connection but check 
 
 http://localhost:3000/health returns back a {status:up} detail.
 
-Other endpoints for testing in curl&
+Other endpoints for testing in curl
 
 ```
 curl http://localhost:3000/
@@ -434,7 +438,7 @@ In the angular directory, create a file named .dockerignore, with the following 
 node_modules/ The ignore file may be hidden so you will have to view hidden files.
 ```
 
-Build the docker image for angular:dev from a terminal (make sure to cd to the angular folder first) with the following command&
+Build the docker image for angular:dev from a terminal (make sure to cd to the angular folder first) with the following command
 
 ```
 docker build --rm -t angular:dev .
@@ -464,7 +468,7 @@ docker stop angular
 1. Setup Docker Compose
    From your root home directory, cd to the meanstack directory: cd meanstack
 
-Run the following command to create a docker compose yml file: touch docker-compose.yml and add the following text to the file&
+Run the following command to create a docker compose yml file: touch docker-compose.yml and add the following text to the file
 
 ```
 version: '2' #docker-compose version
@@ -487,14 +491,19 @@ volumes: - ./angular:/app #Trigger recompilation in container
 ```
 
 2. Push express image to Docker Hub (you will have to be logged in to docker and have an account)
-   To prepare the connection to the mongodb, in the express directory and then in the routes directory, modify the api.js. Change the const dbHost to&
+   To prepare the connection to the mongodb, in the express directory and then in the routes directory, modify the api.js. Change the const dbHost to
 
 ```
 const dbHost = 'mongodb://database/meanstack';
 ```
 
 Change to the express directory with the command: cd meanstack/express
-Build the docker image to post to docker hub with the command: docker build --rm -t maxeymr/meanstack_express:dev .
+Build the docker image to post to docker hub with the command:
+
+```
+docker build --rm -t maxeymr/meanstack_express:dev .
+```
+
 Push the docker image to docker hub with the command: docker push maxeymr/meanstack_express:dev
 
 Verify the new repository is in docker hub.
@@ -502,8 +511,17 @@ Verify the new repository is in docker hub.
 3. Push angular image to Docker Hub (you will have to be logged in to docker and have an account)
 
 Change to the express directory with the command: cd meanstack/angular
-Build the docker image to post to docker hub with the command: docker build --rm -t maxeymr/meanstack_angular:dev .
-Push the docker image to docker hub with the command: docker push maxeymr/meanstack_angular:dev
+Build the docker image to post to docker hub with the command:
+
+```
+docker build --rm -t maxeymr/meanstack_angular:dev .
+```
+
+Push the docker image to docker hub with the command:
+
+```
+docker push maxeymr/meanstack_angular:dev
+```
 
 Verify the new repository is in docker hub.
 
