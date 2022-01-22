@@ -4,7 +4,7 @@
 
 ### Setup Clients
 
-1. Make sure Docker, Docker Compose, and Node are installed. In a terminal, run the following commands to verify
+#### 1. Make sure Docker, Docker Compose, and Node are installed. In a terminal, run the following commands to verify
 
 ```
 docker -v
@@ -23,7 +23,7 @@ Note:
 " Docker Compose required install with the command docker sudo apt install docker-compose
 " Node with npm/npx required install with the following commands sudo apt install docker-compose and sudo apt-get install nodejs
 
-2. At your home directory, run the command cd meanstack to create a directory to work from.
+#### 2. At your home directory, run the command cd meanstack to create a directory to work from.
 
 3. Setup MongoDB
    This only verifies the commands to pull a docker image from Docker Hub  to understand how it can work.  
@@ -34,7 +34,7 @@ Note:
 
 In the express directory, create a file named package.json with the following text
 
-```
+```JSON
 {
 "name": "express",
 "version": "0.0.0",
@@ -52,7 +52,7 @@ In the express directory, create a file named package.json with the following te
 
 In the express directory, create a file named server.js with the following text
 
-```
+```JavaScript
 //Get dependencies
 const express = require('express');
 const path = require('path');
@@ -91,7 +91,7 @@ server.listen(port, () => console.log(`API running on localhost:${port}`));
 
 In the express directory, create a routes directory with an api.js file containing the following text
 
-```
+```JavaScript
 //Import dependencies
 const mongoose = require('mongoose');
 const express = require('express');
@@ -170,14 +170,14 @@ message: 'Todo item created successfully'
 module.exports = router;
 ```
 
-Run the following commands to verify your API app&
+Run the following commands to verify your API app
 
 ```
 npm install
 npm start
 ```
 
-The application will be running at http://localhost:3000/ displaying the text Todo APIs& if it is working.
+The application will be running at http://localhost:3000/ displaying the text "Todo APIs" if it is working.
 Other endpoints created of interest by the curl command
 
 ```
@@ -209,30 +209,30 @@ In the angular/src/app directory, delete the file named app.component.spec.ts
 
 In the angular/src directory, update the index.html file to the following
 
-```
-<!doctype html>
+```html
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Angular Client</title>
-  <base href="/">
+  <head>
+    <meta charset="utf-8" />
+    <title>Angular Client</title>
+    <base href="/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Bootstrap CDN -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
 
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root>Loading...</app-root>
-</body>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <app-root>Loading...</app-root>
+  </body>
 </html>
 ```
 
 In the angular/src/app directory, update the app.component.html file to the following
 
-```
+```html
 <nav class="navbar navbar-light bg-faded">
   <a class="navbar-brand" href="#">M.E.A.N. Stack</a>
 </nav>
@@ -244,24 +244,24 @@ In the angular/src/app directory, update the app.component.html file to the foll
       <form>
         <div class="form-group">
           <label for="tag">Tag</label>
-          <input type="text" class="form-control" id="tag" #tag>
+          <input type="text" class="form-control" id="tag" #tag />
         </div>
         <div class="form-group">
           <label for="task">Task</label>
-          <input type="text" class="form-control" id="task" #task>
+          <input type="text" class="form-control" id="task" #task />
         </div>
         <button type="button" (click)="addTodo(tag.value, task.value)" class="btn btn-primary">Add todo</button>
       </form>
     </div>
   </div>
-  <br>
-  <br>
+  <br />
+  <br />
   <div class="row">
     <div class="col">
       <h4>Todos...</h4>
       <ul class="list-group" *ngFor="let todo of todos; let i = index">
         <li class="list-group-item">{{i+1}}. <b>{{todo.tag}}</b> | <i>{{todo.task}}</i></li>
-     </ul>
+      </ul>
     </div>
   </div>
 </div>
@@ -269,7 +269,7 @@ In the angular/src/app directory, update the app.component.html file to the foll
 
 In the angular/src/app directory, update the app.component.ts file to the following
 
-```
+```TypeScript
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -315,7 +315,7 @@ this.todos = todos
 
 In the angular/src/app directory, update the app.module.ts file to the following
 
-```
+```Typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'; // add http client module
@@ -336,7 +336,7 @@ bootstrap: [AppComponent]
 export class AppModule { }
 ```
 
-Run the following commands to verify your API app&
+Run the following commands to verify your API app
 
 ```
 npm install
@@ -358,7 +358,7 @@ npm start
    In the express directory, create a file named Dockerfile, with the following text
    #Docker file instructions...
 
-```
+```Dockerfile
 # create image
 # set directory for app
 # copy dependencies
@@ -412,7 +412,7 @@ curl http://localhost:3000/todos/id/[needsid]
    In the angular directory, create a file named Dockerfile, with the following text
    #Docker file instructions...
 
-```
+```Dockerfile
 # create image
 # set directory for app
 # copy dependencies
@@ -451,7 +451,7 @@ It may take a minute or more for the container to complete connection but check 
    The angular app will be running at: http://localhost:4200/
    You will be able to add Todo items if the mongodb and express containers are running.
 
-Angular app running in a browser with 1 todo item added&
+Angular app running in a browser with 1 todo item added
 
 6. Stop the running containers with the commands
 
@@ -470,7 +470,7 @@ docker stop angular
 
 Run the following command to create a docker compose yml file: touch docker-compose.yml and add the following text to the file
 
-```
+```yml
 version: '2' #docker-compose version
 
 #Define the services and containers
@@ -493,8 +493,8 @@ volumes: - ./angular:/app #Trigger recompilation in container
 2. Push express image to Docker Hub (you will have to be logged in to docker and have an account)
    To prepare the connection to the mongodb, in the express directory and then in the routes directory, modify the api.js. Change the const dbHost to
 
-```
-const dbHost = 'mongodb://database/meanstack';
+```javascript
+const dbHost = "mongodb://database/meanstack";
 ```
 
 Change to the express directory with the command: cd meanstack/express
@@ -526,7 +526,7 @@ docker push maxeymr/meanstack_angular:dev
 Verify the new repository is in docker hub.
 
 4. Show Angular application is running
-   Change to the meanstack directory and run the command docker-compose up --build to build and run the containers  after a while the three containers with mongo, express, and angular should be available at the following addresses&
+   Change to the meanstack directory and run the command docker-compose up --build to build and run the containers  after a while the three containers with mongo, express, and angular should be available at the following addresses
    mongo: http://localhost:27017/
    express: http://localhost:3000/
    angular: http://localhost:4200/
@@ -534,11 +534,11 @@ Verify the new repository is in docker hub.
 The angular app will be running at: http://localhost:4200/
 You will be able to add Todo items if the mongodb and express containers are running.
 
-Angular app running in a browser with 1 todo item added&
+Angular app running in a browser with 1 todo item added
 
 Press Ctrl+C to stop the running processes (and the three containers will stop).
 
-## Notes: The following commands are useful with docker compose&
+## Notes: The following commands are useful with docker compose
 
 ```
 docker-compose ps will list the containers
@@ -550,18 +550,17 @@ docker-compose down will stop and remove containers and etc.
 
 1. Advantages
 
-- Cost savings in infrastructure.
-- Software standardization.
-- Removes versioning and dependency issues.
-- Improved configurations and building of apps.
-- Good solution for CI/CD of applications.
-- Build once and deploy to multiple environments or operating systems.
-- Applications can run in isolation.
+   - Cost savings in infrastructure.
+   - Software standardization.
+   - Removes versioning and dependency issues.
+   - Improved configurations and building of apps.
+   - Good solution for CI/CD of applications.
+   - Build once and deploy to multiple environments or operating systems.
+   - Applications can run in isolation.
 
 2. Disadvantages
-
-- Security issues due to common kernel and components of hose OS.
-- Tedious to prepare containers.
-- Requires docker on each machine which runs docker.
-- Data storage concerns where data inside containers is removed when closed (you have to migrate data away from a container before shutting it down).
-- Not designed for all use cases (best suited for microservices implementation.
+   - Security issues due to common kernel and components of hose OS.
+   - Tedious to prepare containers.
+   - Requires docker on each machine which runs docker.
+   - Data storage concerns where data inside containers is removed when closed (you have to migrate data away from a container before shutting it down).
+   - Not designed for all use cases (best suited for microservices implementation.
