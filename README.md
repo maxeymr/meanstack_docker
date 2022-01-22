@@ -25,12 +25,14 @@ Note:
 
 #### 2. At your home directory, run the command cd meanstack to create a directory to work from.
 
-3. Setup MongoDB
-   This only verifies the commands to pull a docker image from Docker Hub  to understand how it can work.  
-   Run the command docker pull mongo to get the latest mongodb image from Docker Hub.
+#### 3. Setup MongoDB
 
-4. Setup Express API Application
-   In the meanstack directory, create a directory with the command mkdir express
+This only verifies the commands to pull a docker image from Docker Hub  to understand how it can work.  
+ Run the command docker pull mongo to get the latest mongodb image from Docker Hub.
+
+#### 4. Setup Express Application
+
+In the meanstack directory, create a directory with the command mkdir express
 
 In the express directory, create a file named package.json with the following text
 
@@ -188,8 +190,9 @@ curl http://localhost:3000/todos/tag/Food
 curl http://localhost:3000/todos/id/[needsid]
 ```
 
-5. Setup Angular Application
-   In the meanstack directory, create a directory with the command mkdir angular
+#### 5. Setup Angular Application
+
+In the meanstack directory, create a directory with the command mkdir angular
 
 Run the following command to setup an angular app and set up dependencies in the angular directory
 
@@ -349,14 +352,16 @@ npm start
 
 ### Setup container images
 
-1. Run MongoDB image locally (to see how it runs)
-   Run the mongo container with the command: docker run --rm -d --name mongodb -p 27017:27017 mongo
-   It may take a minute or more for the container to complete connection but check the logs several times by running the following command (to see when the container is running): docker logs mongodb
-   Go to the url http://localhost:27017/ - This url will show a message of It looks like you are trying to access MongoDB over HTTP on the native driver port. when mongo is running.
+#### 1. Run MongoDB image locally (to see how it runs)
 
-2. Create and run image for Express
-   In the express directory, create a file named Dockerfile, with the following text
-   #Docker file instructions...
+Run the mongo container with the command: docker run --rm -d --name mongodb -p 27017:27017 mongo
+It may take a minute or more for the container to complete connection but check the logs several times by running the following command (to see when the container is running): docker logs mongodb
+Go to the url http://localhost:27017/ - This url will show a message of It looks like you are trying to access MongoDB over HTTP on the native driver port. when mongo is running.
+
+#### 2. Create and run image for Express
+
+In the express directory, create a file named Dockerfile, with the following text
+#Docker file instructions...
 
 ```Dockerfile
 # create image
@@ -393,8 +398,9 @@ docker build --rm -t express:dev .
 You can test the image out by running the command: docker run --rm -d --name express -p 3000:3000 express:dev
 It may take a minute or more for the container to complete connection but check the logs several times by running the following command (to see when the container is running): docker logs express
 
-3. Test Express endpoints
-   The app will be running at: http://localhost:3000/
+#### 3. Test Express endpoints
+
+The app will be running at: http://localhost:3000/
 
 http://localhost:3000/health returns back a {status:up} detail.
 
@@ -408,9 +414,10 @@ curl http://localhost:3000/todos/tag/Food
 curl http://localhost:3000/todos/id/[needsid]
 ```
 
-4. Create and run image for Angular
-   In the angular directory, create a file named Dockerfile, with the following text
-   #Docker file instructions...
+#### 4. Create and run image for Angular
+
+In the angular directory, create a file named Dockerfile, with the following text
+#Docker file instructions...
 
 ```Dockerfile
 # create image
@@ -447,13 +454,14 @@ docker build --rm -t angular:dev .
 You can test the image out by running the command: docker run --rm -d --name angular -p 4200:4200 angular:dev
 It may take a minute or more for the container to complete connection but check the logs several times by running the following command (to see when the container is running with a Compiled Successfully message): docker logs angular
 
-5. Test Angular application and verify it is running
-   The angular app will be running at: http://localhost:4200/
-   You will be able to add Todo items if the mongodb and express containers are running.
+#### 5. Test Angular application and verify it is running
+
+The angular app will be running at: http://localhost:4200/
+You will be able to add Todo items if the mongodb and express containers are running.
 
 Angular app running in a browser with 1 todo item added
 
-6. Stop the running containers with the commands
+#### 6. Stop the running containers with the commands
 
 ```
 docker stop mongodb
@@ -465,8 +473,9 @@ docker stop angular
 
 ### Push images to Docker Hub and run with Docker Compose
 
-1. Setup Docker Compose
-   From your root home directory, cd to the meanstack directory: cd meanstack
+#### 1. Setup Docker Compose
+
+From your root home directory, cd to the meanstack directory: cd meanstack
 
 Run the following command to create a docker compose yml file: touch docker-compose.yml and add the following text to the file
 
@@ -490,8 +499,9 @@ ports: - "4200:4200"
 volumes: - ./angular:/app #Trigger recompilation in container
 ```
 
-2. Push express image to Docker Hub (you will have to be logged in to docker and have an account)
-   To prepare the connection to the mongodb, in the express directory and then in the routes directory, modify the api.js. Change the const dbHost to
+#### 2. Push express image to Docker Hub (you will have to be logged in to docker and have an account)
+
+To prepare the connection to the mongodb, in the express directory and then in the routes directory, modify the api.js. Change the const dbHost to
 
 ```javascript
 const dbHost = "mongodb://database/meanstack";
@@ -508,7 +518,7 @@ Push the docker image to docker hub with the command: docker push maxeymr/meanst
 
 Verify the new repository is in docker hub.
 
-3. Push angular image to Docker Hub (you will have to be logged in to docker and have an account)
+#### 3. Push angular image to Docker Hub (you will have to be logged in to docker and have an account)
 
 Change to the express directory with the command: cd meanstack/angular
 Build the docker image to post to docker hub with the command:
@@ -525,11 +535,12 @@ docker push maxeymr/meanstack_angular:dev
 
 Verify the new repository is in docker hub.
 
-4. Show Angular application is running
-   Change to the meanstack directory and run the command docker-compose up --build to build and run the containers  after a while the three containers with mongo, express, and angular should be available at the following addresses
-   mongo: http://localhost:27017/
-   express: http://localhost:3000/
-   angular: http://localhost:4200/
+#### 4. Show Angular application is running
+
+Change to the meanstack directory and run the command docker-compose up --build to build and run the containers  after a while the three containers with mongo, express, and angular should be available at the following addresses
+mongo: http://localhost:27017/
+express: http://localhost:3000/
+angular: http://localhost:4200/
 
 The angular app will be running at: http://localhost:4200/
 You will be able to add Todo items if the mongodb and express containers are running.
@@ -548,19 +559,20 @@ docker-compose down will stop and remove containers and etc.
 
 ## Advantages and disadvantages of docker and containers
 
-1. Advantages
+#### 1. Advantages
 
-   - Cost savings in infrastructure.
-   - Software standardization.
-   - Removes versioning and dependency issues.
-   - Improved configurations and building of apps.
-   - Good solution for CI/CD of applications.
-   - Build once and deploy to multiple environments or operating systems.
-   - Applications can run in isolation.
+- Cost savings in infrastructure.
+- Software standardization.
+- Removes versioning and dependency issues.
+- Improved configurations and building of apps.
+- Good solution for CI/CD of applications.
+- Build once and deploy to multiple environments or operating systems.
+- Applications can run in isolation.
 
-2. Disadvantages
-   - Security issues due to common kernel and components of hose OS.
-   - Tedious to prepare containers.
-   - Requires docker on each machine which runs docker.
-   - Data storage concerns where data inside containers is removed when closed (you have to migrate data away from a container before shutting it down).
-   - Not designed for all use cases (best suited for microservices implementation.
+#### 2. Disadvantages
+
+- Security issues due to common kernel and components of hose OS.
+- Tedious to prepare containers.
+- Requires docker on each machine which runs docker.
+- Data storage concerns where data inside containers is removed when closed (you have to migrate data away from a container before shutting it down).
+- Not designed for all use cases (best suited for microservices implementation.
